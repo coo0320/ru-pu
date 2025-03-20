@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>脱・思考ループ瞑想術ツール</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #534bae;
+            --gold: #c9b037;
+            --light-gray: #f5f5f5;
+            --dark-gray: #424242;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.7;
+            color: #212121;
+            background-color: var(--white);
+            padding: 0;
+            margin: 0;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #000051 100%);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .intro {
+            background-color: var(--light-gray);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .tool-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tool-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 20px;
+        }
+        
+        .tool-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        
+        .tool-content {
+            padding: 20px;
+        }
+        
+        .tool-content p {
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .btn:hover, .btn:active {
+            background-color: var(--primary-light);
+        }
+        
+        .features {
+            margin: 30px 0;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding-left: 5px;
+        }
+        
+        .feature-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .feature-list li:before {
+            content: "・";
+            position: absolute;
+            left: 8px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--primary);
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        @media (min-width: 768px) {
+            .tool-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            header {
+                padding: 50px 0;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>脱・思考ループ瞑想術ツール</h1>
+            <p>思考ループから抜け出すための実践的な診断と記録のツール</p>
+        </header>
+
+        <div class="intro">
+            <h2>「５Kメソッド」とは？</h2>
+            <p>「５Kメソッド」は、反復する思考パターン（思考ループ）から抜け出すための体系的なアプローチです。「気付く(Kizuku)」「割る(Waru)」「見詰める(Mitsumeru)」「作る(Tsukuru)」「輝く(Kagayaku)」の5つのステップで構成されています。</p>
+            <p>このページでは、最初のステップである「気付く(Kizuku)」を実践するための2つのツールを提供しています。</p>
+        </div>
+
+        <div class="tool-container">
+            <div class="tool-card">
+                <div class="tool-header">
+                    <h3>思考パターン自己診断シート</h3>
+                </div>
+                <div class="tool-content">
+                    <p>あなたの思考ループのパターンを特定し、理解するための自己診断ツールです。どのタイプの思考ループが強いのかを知り、効果的な対策を見つけることができます。</p>
+                    <p><strong>特徴：</strong> 過去反芻型、未来不安型、完璧主義型など、あなたの思考ループタイプを診断</p>
+                    <a href="mobile-diagnostic.html" class="btn">診断シートを開く</a>
+                </div>
+            </div>
+            <div class="tool-card">
+                <div class="tool-header">
+                    <h3>思考ループ観察日記</h3>
+                </div>
+                <div class="tool-content">
+                    <p>日々の思考ループを記録し、パターンを認識するための観察日記です。気づきを深め、思考の癖を見つけることで、「５Kメソッド」の実践に役立ちます。</p>
+                    <p><strong>特徴：</strong> 思考ループの内容、強さ、きっかけ、感情などを記録し、ファイルとして保存</p>
+                    <a href="mobile-journal.html" class="btn">観察日記を開く</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>ツールの特徴</h2>
+            <ul class="feature-list">
+                <li>スマートフォン・タブレット・PCなど、あらゆるデバイスに対応</li>
+                <li>ブラウザ上で動作し、インストール不要</li>
+                <li>入力したデータはお使いのデバイスに保存され、サーバーには送信されません</li>
+                <li>科学的根拠に基づいた質問と分析</li>
+                <li>日本文化に根ざした「金継ぎ」の美意識を取り入れた思考アプローチ</li>
+                <li>記録した思考パターンを振り返ることで、自己理解を深める</li>
+            </ul>
+        </div>
+
+        <div class="quote">
+            「あなたの思考の割れ目は、金で埋めることで美しさになる」
+        </div>
+
+        <div class="footer">
+            © 脱・思考ループ瞑想術 | これらのツールは教育目的でのみ使用されるべきであり、医学的アドバイスを提供するものではありません。
+        </div>
+    </div>
+</body>
+</html>

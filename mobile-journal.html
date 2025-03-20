@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>思考ループ観察日記（簡易版）</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #534bae;
+            --gold: #c9b037;
+            --light-gray: #f5f5f5;
+            --dark-gray: #424242;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.7;
+            color: #212121;
+            background-color: var(--white);
+            padding: 0;
+            margin: 0;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #000051 100%);
+            color: var(--white);
+            padding: 25px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 25px;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            padding: 0 10px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        h3 {
+            color: var(--primary-light);
+            font-size: 1.2rem;
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .intro {
+            background-color: var(--light-gray);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--primary);
+            line-height: 1.6;
+        }
+        
+        .intro ol {
+            margin-left: 20px;
+            padding-left: 15px;
+        }
+        
+        .intro li {
+            margin-bottom: 8px;
+        }
+        
+        .journal-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .date-input {
+            margin-bottom: 20px;
+        }
+        
+        .date-input label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .date-input input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            -webkit-appearance: none;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 20px;
+            transition: border 0.3s;
+            -webkit-appearance: none;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(26, 35, 126, 0.2);
+        }
+        
+        .textarea-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .input-row {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .input-item {
+            flex: 1;
+        }
+        
+        .input-item label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .input-item input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            -webkit-appearance: none;
+        }
+        
+        .save-button, .print-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+            min-height: 50px;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .save-button:hover, .save-button:active,
+        .print-button:hover, .print-button:active {
+            background-color: var(--primary-light);
+        }
+        
+        .print-button {
+            background-color: #3f51b5;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--primary);
+            text-align: center;
+            margin: 20px 0;
+            padding: 0 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        /* スマートフォン用の追加スタイル */
+        @media (min-width: 768px) {
+            .input-row {
+                flex-direction: row;
+            }
+            
+            .button-group {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .save-button, .print-button {
+                width: auto;
+                min-width: 200px;
+            }
+        }
+        
+        /* iOS用の調整 */
+        @supports (-webkit-touch-callout: none) {
+            input, textarea, select, button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>思考ループ観察日記</h1>
+            <p>気付き(Kizuku)の実践で思考パターンを認識する簡易版ツール</p>
+        </header>
+
+        <div class="intro">
+            <p>この観察日記は、あなたの思考ループのパターンを認識し、記録するためのツールです。毎日5-10分程度の時間をとって記入することで、思考の癖を見つけ、「５Kメソッド」の最初のステップである「気付く(Kizuku)」の実践に役立ちます。</p>
+            
+            <p><strong>記入のステップ：</strong></p>
+            <ol>
+                <li>思考ループが発生したとき、または一日の終わりに振り返って記録します</li>
+                <li>できるだけ具体的に、判断せずに観察したことを書き留めます</li>
+                <li>パターンを見つけるために定期的に過去のエントリーを見直します</li>
+            </ol>
+        </div>
+
+        <div class="journal-section">
+            <h2>今日の思考ループ観察</h2>
+            
+            <div class="date-input">
+                <label for="entry-date">今日の日付:</label>
+                <input type="date" id="entry-date" name="entry-date">
+            </div>
+            
+            <h3>今日の主な思考ループ</h3>
+            <div class="textarea-label">繰り返し考えていた内容：</div>
+            <textarea id="thought-content" placeholder="今日、あなたが繰り返し考えていた思考について詳しく書いてください..."></textarea>
+            
+            <div class="input-row">
+                <div class="input-item">
+                    <label for="thought-strength">この思考の強さ（1-10）：</label>
+                    <input type="number" id="thought-strength" min="1" max="10" placeholder="1-10">
+                </div>
+                <div class="input-item">
+                    <label for="thought-duration">持続時間：</label>
+                    <input type="text" id="thought-duration" placeholder="例: 約30分間">
+                </div>
+            </div>
+            
+            <h3>きっかけとなった状況</h3>
+            <div class="textarea-label">この思考ループが始まるきっかけとなった出来事や状況：</div>
+            <textarea id="thought-trigger" placeholder="思考ループが始まるきっかけとなった状況や出来事について書いてください..."></textarea>
+            
+            <h3>感じた感情と身体感覚</h3>
+            <div class="textarea-label">思考ループ中に感じた感情や身体の感覚：</div>
+            <textarea id="thought-feelings" placeholder="思考ループ中に感じた感情（不安、怒り、悲しみなど）や身体感覚（胸の締め付け、肩の緊張など）について書いてください..."></textarea>
+            
+            <h3>「割る(Waru)」の実践</h3>
+            <div class="textarea-label">思考ループを中断するために試したこと（もしあれば）：</div>
+            <textarea id="thought-interruption" placeholder="思考ループを意識的に中断するために行ったことがあれば記録してください..."></textarea>
+        </div>
+
+        <div class="button-group">
+            <button class="save-button" id="save-button">記録を保存する</button>
+            <button class="print-button" id="print-button">印刷する</button>
+        </div>
+        
+        <div class="quote">
+            「あなたの思考の模様は、金継ぎのように再構築することで新たな美しさになる」
+        </div>
+
+        <div class="footer">
+            © 脱・思考ループ瞑想術 | この観察日記は教育目的でのみ使用されるべきであり、医学的アドバイスを提供するものではありません。
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 今日の日付をデフォルトで設定
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0];
+            document.getElementById('entry-date').value = formattedDate;
+            
+            // フォーム要素のフォーカス時の処理（iOS対応）
+            const formInputs = document.querySelectorAll('input, textarea');
+            formInputs.forEach(input => {
+                // フォーカス時に全選択
+                input.addEventListener('focus', function() {
+                    if (this.type !== 'date') {
+                        setTimeout(() => this.select(), 10);
+                    }
+                });
+                
+                // 数値入力の場合、範囲チェック
+                if (input.type === 'number') {
+                    input.addEventListener('input', function() {
+                        const min = parseInt(this.min) || 0;
+                        const max = parseInt(this.max) || 10;
+                        let value = parseInt(this.value) || 0;
+                        
+                        if (value < min) value = min;
+                        if (value > max) value = max;
+                        this.value = value;
+                    });
+                }
+            });
+            
+            // 保存ボタンのクリックイベント - ファイルをダウンロードする機能を実装
+            document.getElementById('save-button').addEventListener('click', function() {
+                // 入力されたデータを取得
+                const entryDate = document.getElementById('entry-date').value;
+                const thoughtContent = document.getElementById('thought-content').value;
+                const thoughtStrength = document.getElementById('thought-strength').value;
+                const thoughtDuration = document.getElementById('thought-duration').value;
+                const thoughtTrigger = document.getElementById('thought-trigger').value;
+                const thoughtFeelings = document.getElementById('thought-feelings').value;
+                const thoughtInterruption = document.getElementById('thought-interruption').value;
+                
+                // 日付を日本語形式に変換
+                const dateObj = new Date(entryDate);
+                const jpDate = `${dateObj.getFullYear()}年${dateObj.getMonth() + 1}月${dateObj.getDate()}日`;
+                
+                // ファイルの内容を作成
+                let fileContent = `# 思考ループ観察日記\n\n`;
+                fileContent += `## 記録日: ${jpDate}\n\n`;
+                fileContent += `### 今日の主な思考ループ\n`;
+                fileContent += `繰り返し考えていた内容：\n${thoughtContent}\n\n`;
+                fileContent += `この思考の強さ（1-10）：${thoughtStrength}\n`;
+                fileContent += `持続時間：${thoughtDuration}\n\n`;
+                fileContent += `### きっかけとなった状況\n${thoughtTrigger}\n\n`;
+                fileContent += `### 感じた感情と身体感覚\n${thoughtFeelings}\n\n`;
+                fileContent += `### 「割る(Waru)」の実践\n${thoughtInterruption}\n\n`;
+                fileContent += `---\n`;
+                fileContent += `「あなたの思考の模様は、金継ぎのように再構築することで新たな美しさになる」\n`;
+                
+                // ファイル名の作成（日付＋思考ループ）
+                const fileName = `思考ループ観察日記_${entryDate.replace(/-/g, '')}.txt`;
+                
+                // モバイルデバイス検出
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                
+                // ダウンロード処理
+                if (isMobile) {
+                    // モバイルデバイスでのダウンロード処理
+                    mobileDownload(fileName, fileContent);
+                } else {
+                    // デスクトップでのダウンロード処理
+                    desktopDownload(fileName, fileContent);
+                }
+            });
+            
+            // モバイルデバイス用のダウンロード処理
+            function mobileDownload(fileName, content) {
+                try {
+                    // Blobオブジェクトを作成
+                    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+                    
+                    // ファイルURLを作成
+                    const url = URL.createObjectURL(blob);
+                    
+                    // ダウンロード用のリンクを作成
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = url;
+                    downloadLink.download = fileName;
+                    downloadLink.style.display = 'none';
+                    
+                    // リンクをDOMに追加してクリック
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    
+                    // クリーンアップ
+                    setTimeout(() => {
+                        document.body.removeChild(downloadLink);
+                        URL.revokeObjectURL(url);
+                    }, 100);
+                    
+                    alert('記録を保存しました。ダウンロードが始まらない場合は、印刷ボタンを使用してPDFとして保存することもできます。');
+                } catch (error) {
+                    console.error('ダウンロードエラー:', error);
+                    alert('ファイルの保存中にエラーが発生しました。印刷ボタンを使用してPDFとして保存することをお試しください。');
+                }
+            }
+            
+            // デスクトップ用のダウンロード処理
+            function desktopDownload(fileName, content) {
+                // Blobオブジェクトを作成
+                const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+                
+                // ダウンロード用のリンクを作成
+                const downloadLink = document.createElement('a');
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = fileName;
+                
+                // リンクを一時的にDOMに追加してクリックし、その後削除
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                
+                // 作成したオブジェクトURLを解放
+                URL.revokeObjectURL(downloadLink.href);
+                
+                alert('記録を保存しました。');
+            }
+            
+            // 印刷ボタンのクリックイベント
+            document.getElementById('print-button').addEventListener('click', function() {
+                window.print();
+            });
+        });
+    </script>
+</body>
+</html>

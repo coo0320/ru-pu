@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>思考パターン自己診断シート（簡易版）</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #534bae;
+            --gold: #c9b037;
+            --light-gray: #f5f5f5;
+            --dark-gray: #424242;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.7;
+            color: #212121;
+            background-color: var(--white);
+            padding: 0;
+            margin: 0;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #000051 100%);
+            color: var(--white);
+            padding: 25px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 25px;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            padding: 0 10px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        h3 {
+            color: var(--primary-light);
+            font-size: 1.2rem;
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .intro {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .section {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .question-group {
+            margin-bottom: 20px;
+        }
+        
+        .question {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .question-text {
+            margin-bottom: 8px;
+        }
+        
+        .score-input {
+            width: 65px;
+            height: 44px;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            align-self: flex-end;
+            -webkit-appearance: none;
+        }
+        
+        .score-description {
+            font-size: 0.8rem;
+            color: var(--dark-gray);
+            margin: 12px 0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .score-description span {
+            margin-bottom: 5px;
+        }
+        
+        .subtotal {
+            margin-top: 15px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .subtotal-label {
+            margin-right: 10px;
+        }
+        
+        .subtotal-value {
+            width: 65px;
+            padding: 10px;
+            text-align: center;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        
+        .results {
+            background-color: #f0f4ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid #d0d9ff;
+        }
+        
+        .result-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        
+        .result-item .result-label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .btn-calculate {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 15px 0;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+            min-height: 50px;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .btn-calculate:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .premium-banner {
+            background: linear-gradient(135deg, #f5e0aa 0%, var(--gold) 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .premium-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #5d4037;
+        }
+        
+        .premium-link {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .premium-link:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--primary);
+            text-align: center;
+            margin: 20px 0;
+            padding: 0 15px;
+        }
+        
+        /* カスタムリストのスタイル */
+        .custom-list {
+            list-style-type: none;
+            padding-left: 5px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .custom-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .custom-list li:before {
+            content: "・";
+            position: absolute;
+            left: 8px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* パターン説明のスタイリング */
+        .pattern-explanation p {
+            margin-bottom: 15px;
+        }
+        
+        /* スマートフォン向け調整 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 20px 0;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            .score-description {
+                margin: 10px 0;
+            }
+            
+            .question {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px 0;
+            }
+            
+            .question-text {
+                margin-bottom: 12px;
+                font-size: 1rem;
+            }
+            
+            .score-input {
+                align-self: flex-end;
+            }
+            
+            .result-item {
+                flex-direction: column;
+            }
+            
+            .result-item .result-label {
+                margin-bottom: 8px;
+            }
+            
+            .custom-list li {
+                padding-left: 22px;
+            }
+            
+            .custom-list li:before {
+                left: 5px;
+            }
+            
+            .score-description {
+                flex-direction: column;
+            }
+            
+            .score-description span {
+                margin-bottom: 5px;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>思考パターン自己診断シート</h1>
+            <p>「５Kメソッド」の第一段階「気付く(Kizuku)」をサポートする簡易診断ツール</p>
+        </header>
+
+        <div class="intro">
+            <p>この診断シートは、あなたの思考ループのパターンを特定し、理解するための自己診断ツールです。「気付く(Kizuku)」をサポートし、自分に適した対策を選ぶための基礎となります。</p>
+            <p>正直に回答し、自分の思考パターンについての理解を深めてください。この診断は自己洞察のためのものであり、医学的診断に代わるものではありません。</p>
+        </div>
+
+        <div class="section">
+            <h2>思考ループの基本パターン診断</h2>
+            <p><em>以下の各文について、どの程度あてはまるかを評価してください：</em></p>
+            <div class="score-description">
+                <span>0=全くあてはまらない</span>
+                <span>1=ほとんどあてはまらない</span>
+                <span>2=ときどきあてはまる</span>
+                <span>3=よくあてはまる</span>
+                <span>4=ほぼいつもあてはまる</span>
+            </div>
+
+            <div class="question-group">
+                <h3>A. 過去反芻型</h3>
+                
+                <div class="question">
+                    <div class="question-text">1. 過去の失敗や恥ずかしい出来事を繰り返し思い出してしまう</div>
+                    <input type="number" min="0" max="4" class="score-input" id="a1" value="0" pattern="[0-4]">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">2. 「あのとき別の言い方をしていれば...」など、過去の会話を何度も分析する</div>
+                    <input type="number" min="0" max="4" class="score-input" id="a2" value="0" pattern="[0-4]">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">3. 過去の選択について後悔の念にとらわれることが多い</div>
+                    <input type="number" min="0" max="4" class="score-input" id="a3" value="0" pattern="[0-4]">
+                </div>
+
+                <div class="subtotal">
+                    <span class="subtotal-label">小計A:</span>
+                    <div class="subtotal-value" id="subtotal-a">0</div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h3>B. 未来不安型</h3>
+                
+                <div class="question">
+                    <div class="question-text">1. これから起こりうる問題について過度に心配してしまう</div>
+                    <input type="number" min="0" max="4" class="score-input" id="b1" value="0" pattern="[0-4]">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">2. 最悪のシナリオを想像して不安になることが多い</div>
+                    <input type="number" min="0" max="4" class="score-input" id="b2" value="0" pattern="[0-4]">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">3. 「もし〜だったら」という考えが頭から離れない</div>
+                    <input type="number" min="0" max="4" class="score-input" id="b3" value="0" pattern="[0-4]">
+                </div>
+
+                <div class="subtotal">
+                    <span class="subtotal-label">小計B:</span>
+                    <div class="subtotal-value" id="subtotal-b">0</div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h3>C. 完璧主義型</h3>
+                
+                <div class="question">
+                    <div class="question-text">1. 「十分ではない」という感覚にとらわれることが多い</div>
+                    <input type="number" min="0" max="4" class="score-input" id="c1" value="0" pattern="[0-4]">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">2. 小さなミスを大きな失敗のように感じてしまう</div>
+                    <input type="number" min="0" max="4" class="score-input" id="c2" value="0" pattern="[0-4]">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">3. 自分の仕事やパフォーマンスについて高すぎる基準を持っている</div>
+                    <input type="number" min="0" max="4" class="score-input" id="c3" value="0" pattern="[0-4]">
+                </div>
+
+                <div class="subtotal">
+                    <span class="subtotal-label">小計C:</span>
+                    <div class="subtotal-value" id="subtotal-c">0</div>
+                </div>
+            </div>
+            
+            <div class="question-group">
+                <h3>D. 人間関係懸念型</h3>
+                
+                <div class="question">
+                    <div class="question-text">1. 他者が自分をどう思っているか気になって仕方がない</div>
+                    <input type="number" min="0" max="4" class="score-input" id="d1" value="0" pattern="[0-4]">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">2. 会話の後、自分の言動を何度も振り返ることがある</div>
+                    <input type="number" min="0" max="4" class="score-input" id="d2" value="0" pattern="[0-4]">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">3. 「嫌われているのではないか」と心配することが多い</div>
+                    <input type="number" min="0" max="4" class="score-input" id="d3" value="0" pattern="[0-4]">
+                </div>
+
+                <div class="subtotal">
+                    <span class="subtotal-label">小計D:</span>
+                    <div class="subtotal-value" id="subtotal-d">0</div>
+                </div>
+            </div>
+            
+            <div class="question-group">
+                <h3>E. アイデンティティ混乱型</h3>
+                
+                <div class="question">
+                    <div class="question-text">1. 「自分は何者なのか」について考え込むことがある</div>
+                    <input type="number" min="0" max="4" class="score-input" id="e1" value="0" pattern="[0-4]">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">2. 自分の人生の意義や目的について悩むことが多い</div>
+                    <input type="number" min="0" max="4" class="score-input" id="e2" value="0" pattern="[0-4]">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">3. 「このままでいいのだろうか」と自問自答することがある</div>
+                    <input type="number" min="0" max="4" class="score-input" id="e3" value="0" pattern="[0-4]">
+                </div>
+
+                <div class="subtotal">
+                    <span class="subtotal-label">小計E:</span>
+                    <div class="subtotal-value" id="subtotal-e">0</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-calculate" id="calculate-results">診断結果を確認する</button>
+
+        <div class="results" id="results-section" style="display: none;">
+            <h2>診断結果</h2>
+            
+            <div class="result-item">
+                <span class="result-label">過去反芻型 (A):</span>
+                <span id="result-a">0/12</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">未来不安型 (B):</span>
+                <span id="result-b">0/12</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">完璧主義型 (C):</span>
+                <span id="result-c">0/12</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">人間関係懸念型 (D):</span>
+                <span id="result-d">0/12</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">アイデンティティ混乱型 (E):</span>
+                <span id="result-e">0/12</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">主要な思考ループタイプ:</span>
+                <span id="main-type"></span>
+            </div>
+            
+            <h3>思考パターンの説明</h3>
+            <div id="pattern-explanation" class="pattern-explanation">
+                <p><strong>過去反芻型:</strong> 過去の出来事や失敗、言動について繰り返し考え続けるパターンです。「あのとき別の行動をとっていれば...」という後悔や、過去の恥ずかしい経験を何度も思い出すことが特徴です。</p>
+                
+                <p><strong>未来不安型:</strong> これから起こりうる問題やシナリオについて過度に心配するパターンです。最悪の結果を想像したり、不確実性に対して過剰に備えようとする傾向があります。</p>
+                
+                <p><strong>完璧主義型:</strong> 高すぎる基準を設定し、小さなミスも許せないという思考パターンです。「十分ではない」という感覚にとらわれ、白黒思考（完璧か失敗か）の傾向があります。</p>
+                
+                <p><strong>人間関係懸念型:</strong> 他者からの評価や人間関係について過度に考え込むパターンです。「嫌われている」「どう思われているか」という懸念が強く、社会的相互作用への不安が特徴です。</p>
+                
+                <p><strong>アイデンティティ混乱型:</strong> 自分自身の価値や存在意義について繰り返し考え込むパターンです。「自分は何者か」「このままでいいのか」という自己定義に関する問いが頭から離れない状態です。</p>
+            </div>
+            
+            <h3>あなたの主要パターンへの対応法</h3>
+            <div id="main-pattern-tips"></div>
+            
+            <p>この簡易診断では、あなたの主要な思考ループパターンが表示されています。それぞれのパターンに対応するテクニックを実践してみることをおすすめします。</p>
+        </div>
+
+        <div class="quote">
+            「あなたの思考の模様は、金継ぎのように再構築することで新たな美しさになる」
+        </div>
+
+        <div class="footer">
+            © 脱・思考ループ瞑想術 | この診断シートは教育目的でのみ使用されるべきであり、医学的アドバイスを提供するものではありません。
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // すべての入力フィールドを取得
+            const scoreInputs = document.querySelectorAll('.score-input');
+            
+            // 各入力フィールドに変更イベントリスナーを追加
+            scoreInputs.forEach(input => {
+                // 入力時の処理
+                input.addEventListener('input', function() {
+                    // 入力値が範囲外の場合、範囲内に制限
+                    let value = parseInt(this.value) || 0;
+                    if (value < 0) value = 0;
+                    if (value > 4) value = 4;
+                    this.value = value;
+                    
+                    // 小計を更新
+                    updateSubtotals();
+                });
+                
+                // タップ時に選択する
+                input.addEventListener('focus', function() {
+                    this.select();
+                });
+            });
+            
+            // 小計を更新する関数
+            function updateSubtotals() {
+                // A型の小計
+                const subtotalA = calculateSubtotal(['a1', 'a2', 'a3']);
+                document.getElementById('subtotal-a').textContent = subtotalA;
+                
+                // B型の小計
+                const subtotalB = calculateSubtotal(['b1', 'b2', 'b3']);
+                document.getElementById('subtotal-b').textContent = subtotalB;
+                
+                // C型の小計
+                const subtotalC = calculateSubtotal(['c1', 'c2', 'c3']);
+                document.getElementById('subtotal-c').textContent = subtotalC;
+                
+                // D型の小計
+                const subtotalD = calculateSubtotal(['d1', 'd2', 'd3']);
+                document.getElementById('subtotal-d').textContent = subtotalD;
+                
+                // E型の小計
+                const subtotalE = calculateSubtotal(['e1', 'e2', 'e3']);
+                document.getElementById('subtotal-e').textContent = subtotalE;
+            }
+            
+            // 指定されたIDの入力値を合計する関数
+            function calculateSubtotal(ids) {
+                return ids.reduce((total, id) => {
+                    const value = parseInt(document.getElementById(id).value) || 0;
+                    return total + value;
+                }, 0);
+            }
+            
+            // 結果を計算するボタンのイベントリスナー
+            document.getElementById('calculate-results').addEventListener('click', function() {
+                // 結果セクションを表示
+                document.getElementById('results-section').style.display = 'block';
+                
+                // 結果を更新
+                updateResults();
+                
+                // 結果セクションまでスムーズにスクロール
+                setTimeout(() => {
+                    document.getElementById('results-section').scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }, 100);
+            });
+            
+            // 結果を更新する関数
+            function updateResults() {
+                // 各タイプのスコアを取得
+                const scoreA = parseInt(document.getElementById('subtotal-a').textContent);
+                const scoreB = parseInt(document.getElementById('subtotal-b').textContent);
+                const scoreC = parseInt(document.getElementById('subtotal-c').textContent);
+                const scoreD = parseInt(document.getElementById('subtotal-d').textContent);
+                const scoreE = parseInt(document.getElementById('subtotal-e').textContent);
+                
+                // 結果に表示
+                document.getElementById('result-a').textContent = scoreA + '/12';
+                document.getElementById('result-b').textContent = scoreB + '/12';
+                document.getElementById('result-c').textContent = scoreC + '/12';
+                document.getElementById('result-d').textContent = scoreD + '/12';
+                document.getElementById('result-e').textContent = scoreE + '/12';
+                
+                // 主要なタイプを決定
+                const scores = [
+                    { type: '過去反芻型', score: scoreA },
+                    { type: '未来不安型', score: scoreB },
+                    { type: '完璧主義型', score: scoreC },
+                    { type: '人間関係懸念型', score: scoreD },
+                    { type: 'アイデンティティ混乱型', score: scoreE }
+                ];
+                
+                scores.sort((a, b) => b.score - a.score);
+                const mainType = scores[0].type;
+                document.getElementById('main-type').textContent = mainType;
+                
+                // 主要なパターンに対する対応法を表示
+                const tipsElement = document.getElementById('main-pattern-tips');
+                if (mainType === '過去反芻型') {
+                    tipsElement.innerHTML = `
+                        <p>過去反芻型の対応法:</p>
+                        <ul class="custom-list">
+                            <li>過去は変えられないことを認識し、「今、ここ」に意識を向ける瞑想を実践する</li>
+                            <li>過去の出来事から学びを得て、それを書き出して「学びの収穫」として区切りをつける</li>
+                            <li>自分に対する自己共感を育て、過去の自分を許す練習をする</li>
+                        </ul>
+                    `;
+                } else if (mainType === 'アイデンティティ混乱型') {
+                    tipsElement.innerHTML = `
+                        <p>アイデンティティ混乱型の対応法:</p>
+                        <ul class="custom-list">
+                            <li>自分にとって本当に重要な価値観を明確にし、それを日常生活に反映させる方法を考える</li>
+                            <li>大きな人生の目的ではなく、今日・今週・今月の小さな目標を設定し、達成感を積み重ねる</li>
+                            <li>「私は完璧ではないが、それでいい。私は成長途上である」という自己受容の瞑想を実践する</li>
+                        </ul>
+                    `;
+                } === '未来不安型') {
+                    tipsElement.innerHTML = `
+                        <p>未来不安型の対応法:</p>
+                        <ul class="custom-list">
+                            <li>不確実性を受け入れる練習をし、「最悪の場合」に対する現実的な準備を一度だけ行う</li>
+                            <li>「今」に注目する呼吸瞑想を1日5分取り入れる</li>
+                            <li>心配事を具体的な行動プランに変換し、実行可能なステップに分解する</li>
+                        </ul>
+                    `;
+                } else if (mainType === '完璧主義型') {
+                    tipsElement.innerHTML = `
+                        <p>完璧主義型の対応法:</p>
+                        <ul class="custom-list">
+                            <li>「十分に良い」基準を設定し、完璧と良好の違いを認識する</li>
+                            <li>小さなミスを許容する実験をし、結果を観察する</li>
+                            <li>「どうあるべきか」から「どうありたいか」という視点に切り替える</li>
+                        </ul>
+                    `;
+                } else if (mainType === '人間関係懸念型') {
+                    tipsElement.innerHTML = `
+                        <p>人間関係懸念型の対応法:</p>
+                        <ul class="custom-list">
+                            <li>「観察者視点」で自分自身を第三者の目で見る練習をする</li>
+                            <li>「嫌われている」という思考に対する具体的な証拠と反証を客観的に集める</li>
+                            <li>自分にとって本当に重要な人間関係を特定し、エネルギーを適切に配分する</li>
+                        </ul>
+                    `;
+                } else if (mainType
